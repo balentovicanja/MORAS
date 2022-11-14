@@ -1,0 +1,10 @@
+CHIP Mult4{
+	IN in[16];
+	OUT out[16];
+	
+	PARTS:
+	Add16(a = in, b = in, out = sum1);
+	Add16(a = sum1, b = in, out = sum2);
+	Add16(a = sum2, b = in, out = out);
+
+}
