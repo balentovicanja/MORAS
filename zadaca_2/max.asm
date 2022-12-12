@@ -11,29 +11,28 @@ M=0
 	
 	(INNER_LOOP)
 	@i
-    D=M
-
-    @4
-    D=A-D
-    
-    @LOOP_END
-    D; JLE
-    
-    //dohvati max 
-    @novimax
-    D = M
-    
-    @i
-    M = M + 1
-    A = M
-    D = M - D
-    
-    @LOOP_START
-    D; JGT
-    
-    @INNER_LOOP
-    0; JMP
-    
+	
+	@4
+	D=A-D
+	
+	@LOOP_END
+	D; JLE
+	
+	//dohvati max 
+	@novimax
+	D = M
+	
+	@i
+	M = M + 1
+	A = M
+	D = M - D
+	
+	@LOOP_START
+	D; JGT
+	
+	@INNER_LOOP
+	0; JMP
+	
 (LOOP_END)
 
 //dohvati max
