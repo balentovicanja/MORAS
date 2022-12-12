@@ -1,0 +1,54 @@
+CHIP Mult{
+	IN a[16], b[16];
+	OUT out[16];
+	
+	PARTS:
+	Mux16(a = false, b = a, sel = b[0], out = out1);
+    BitShiftL(in = a, out = shifta1);   
+	Mux16(a = false, b = shifta1, sel = b[1], out = out2);
+	BitShiftL(in = shifta1, out = shifta2);
+	Mux16(a = false, b = shifta2, sel = b[2], out = out3);
+	BitShiftL(in = shifta2, out = shifta3);
+	Mux16(a = false, b = shifta3, sel = b[3], out = out4);
+	BitShiftL(in = shifta3, out = shifta4);
+	Mux16(a = false, b = shifta4, sel = b[4], out = out5);
+	BitShiftL(in = shifta4, out = shifta5);
+	Mux16(a = false, b = shifta5, sel = b[5], out = out6);
+	BitShiftL(in = shifta5, out = shifta6);
+	Mux16(a = false, b = shifta6, sel = b[6], out = out7);
+	BitShiftL(in = shifta6, out = shifta7);
+	Mux16(a = false, b = shifta7, sel = b[7], out = out8);
+	BitShiftL(in = shifta7, out = shifta8);
+	Mux16(a = false, b = shifta8, sel = b[8], out = out9);
+	BitShiftL(in = shifta8, out = shifta9);
+	Mux16(a = false, b = shifta9, sel = b[9], out = out10);
+	BitShiftL(in = shifta9, out = shifta10);
+	Mux16(a = false, b = shifta10, sel = b[10], out = out11);
+	BitShiftL(in = shifta10, out = shifta11);
+	Mux16(a = false, b = shifta11, sel = b[11], out = out12);
+	BitShiftL(in = shifta11, out = shifta12);
+	Mux16(a = false, b = shifta12, sel = b[12], out = out13);
+	BitShiftL(in = shifta12, out = shifta13);
+	Mux16(a = false, b = shifta13, sel = b[13], out = out14);
+	BitShiftL(in = shifta13, out = shifta14);
+	Mux16(a = false, b = shifta14, sel = b[14], out = out15);
+	BitShiftL(in = shifta14, out = shifta15);
+	Mux16(a = false, b = shifta15, sel = b[15], out = out16);
+
+	Add16(a = out1, b = out2, out = rez1);
+	Add16(a = rez1, b = out3, out = rez2);
+	Add16(a = rez2, b = out4, out = rez3);
+	Add16(a = rez3, b = out5, out = rez4);
+	Add16(a = rez4, b = out6, out = rez5);
+	Add16(a = rez5, b = out7, out = rez6);
+	Add16(a = rez6, b = out8, out = rez7);
+	Add16(a = rez7, b = out9, out = rez8);
+	Add16(a = rez8, b = out10, out = rez9);
+	Add16(a = rez9, b = out11, out = rez10);
+	Add16(a = rez10, b = out12, out = rez11);
+	Add16(a = rez11, b = out13, out = rez12);
+	Add16(a = rez12, b = out14, out = rez13);
+	Add16(a = rez13, b = out15, out = rez14);
+	Add16(a = rez14, b = out16, out = out);
+
+}
