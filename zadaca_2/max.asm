@@ -17,7 +17,7 @@ M=0
 	D=A-D
 	
 	@LOOP_END
-	D; JLE
+	D; JLE        //4-i <= 0
 	
 	//dohvati max 
 	@novimax
@@ -29,7 +29,7 @@ M=0
 	D = M - D
 	
 	@LOOP_START
-	D; JGT
+	D; JGT        // M-D > 0
 	
 	@INNER_LOOP
 	0; JMP
