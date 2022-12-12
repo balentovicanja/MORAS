@@ -11,6 +11,7 @@ M=0
 	
 	(INNER_LOOP)
 	@i
+	D=M
 	
 	@4
 	D=A-D
