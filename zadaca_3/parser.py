@@ -1,3 +1,4 @@
+from pathlib import Path
 # IDEJA
 # 1. Iz asemblerske datoteke izbaciti sve razmake i komentare. Sjetite
 #    se kako komentari u hack asembleru mogu biti jednolinijski i
@@ -10,12 +11,11 @@ class Parser:
     from parseLines import _parse_lines, _parse_line
     from parseSymbs import _init_symbols, _parse_symbols, _parse_labels, _parse_variables
     from parseComms import _init_comms, _parse_command, _parse_commands
-    from parseMacro import _parse_macro, _while, _sum, _swp, _mv
     
     def __init__(self, filename):
         # Otvaramo input asemblersku datoteku.
         try:
-            self._file = open(filename + ".asm", "r")
+            self._file = Path(filename + ".asm").read_text()
         except:
             Parser._error("File", -1, "Cannot open source file")
             return
@@ -79,8 +79,8 @@ class Parser:
     #   3. broj linije u originalnoj datoteci
     def _read_lines(self):
         n = 0
-        for line in self._file:
-            self._lines.append((line, n, n));
+        for line in self._file.split("\n"):
+            self._lines.append((line+"\n", n, n))
             n += 1
 
     # Funkcija upisuje parsirane linije u output ".hack" datoteku.
@@ -120,8 +120,60 @@ class Parser:
             print("[" + src + "] " + msg)
         else:
             print(msg)
+            
+    
+    #2.zadatak
+    def _parse_macro(self):
+        o = 0
+        w = []
+        par = []
+        for line in self._file.split("\n"):
+            if len(line) > 0 and line[0] == "$":
+                if line == "$END":
+                    if len(w) == 0:
+                        self._flag = False
+                        self._line = o
+                        self._errm = "Invalid macro"
+                    else:
+                        self._file = self._file.replace(line, f"@WHILELOOP{w[-1]}\n0;JMP\n(END_WHILELOOP{w[-1]})", 1)
+                        w.pop(-1)
+                        par.pop(-1)
+                else:
+                    s = line.replace(" ", "").split("(")
+                    comm = s[0][1:]
+                    params = s[1][:-1]
+                    params = params.split(",")
+                #print(comm, params)
+                    if comm == "MV":
+                        self._file = self._file.replace(line,self._mv(params[0],params[1]), 1)
+                    elif comm == "SWP":
+                        self._file = self._file.replace(line,self._swp(params[0],params[1]), 1)
+                    elif comm == "SUM":
+                        self._file = self._file.replace(line,self._sum(params[0], params[1], params[2]), 1)
+                    elif comm == "WHILE":
+                        w.append(o)
+                        par.append(params[0])
+                        self._file = self._file.replace(line,self._while(params[0], o), 1)
+                    else:
+                        self._flag = False
+                        self._line = o
+        o += 1
+    
+    def _while(self, A, o):
+        return f"(WHILELOOP{o})\n@{A}\nD=M\n@END_WHILELOOP{o}\nD;JEQ\n"
+    
+    def _mv(self, A, B):
+        return f"@{A}\nD=M\n@{B}\nM=D"
+
+    def _swp(self, A, B):
+        return f"@{A}\nD=M\n@temp\nM=D\n@{B}\nD=M\n@{A}\nM=D\n@temp\nD=M\n@{B}\nM=D\n"
+
+    def _sum(self, A, B, C):
+        return f"@{A}\nD=M\n@{B}\nD=D+M\n@{C}\nM=D\n"
+
         
 
 
 if __name__ == "__main__":
-    Parser("test")
+    Parser("zad3a")
+    Parser("zad3b")
