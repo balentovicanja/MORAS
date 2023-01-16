@@ -1,2 +1,44 @@
 function mid 3
 
+    push argument 0
+    push argument 1
+    gt 
+    if-goto xgty
+        push argument 1
+        push argument 2
+        gt
+        if-goto ygtz
+            push argument 1 
+            return
+
+label xgty
+    push argument 0
+    push argument 2
+    gt
+    if-goto xgtz
+        push argument 0
+        return
+
+label ygtz
+    push argument 0
+    push argument 2
+    gt
+    if-goto xgtz_2
+        push argument 2
+        return
+
+label xgtz
+    push argument 1 
+    push argument 2
+    gt
+    if-goto ygtz_2
+        push argument 2
+        return
+
+label xgtz_2
+    push argument 0
+    return
+
+label ygtz_2
+    push argument 1
+    return
