@@ -1,0 +1,60 @@
+class Main
+{
+
+    function void main() {
+		var Vint vecA, vecB;
+        var int i;
+		
+        let vecA = Vint.new(3);
+        let vecB = Vint.new(4);
+		
+		do Output.printString("B len: ");
+        do Output.printInt(vecB.len());
+        do Output.println();
+        
+        do vecA.set(0,5);
+        do vecA.set(4,8);
+        do vecA.set(-1,5);
+        do vecA.set(6,3);
+        do vecB.set(2,8);
+        do vecB.set(1,6);
+        
+        do Output.printInt(vecA.get(1));
+        do Output.println();
+        do Output.printInt(vecB.get(3));
+        do Output.println();
+        
+        do vecB.resize(5);
+        
+        if (Vint.elems(vecA, vecB) = true) {
+            do Output.printString("A == B");
+            do Output.println();
+        }
+        
+		do Output.printString("A: ");
+        while (i < vecA.len()) {
+            do Output.printInt(vecA.get(i));
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+        
+        let i = 0;
+        do Output.println();
+		do Output.printString("B: ");
+        while (i < vecB.len()) {
+            do Output.printInt(vecB.get(i));
+            do Output.printString(" ");
+            let i = i + 1;
+        }
+        
+        do Output.println();
+        
+        if (Vint.is_eq(vecA, vecB) = false) {
+            do Output.printString("A != B");
+            do Output.println();
+        }
+        
+        return;
+    }
+
+}
