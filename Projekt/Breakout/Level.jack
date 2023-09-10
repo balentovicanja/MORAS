@@ -1,0 +1,92 @@
+class Level{ 
+	field int currentIndex;
+	field Array levelArr;
+	field Game game;
+	
+	constructor Level new(Game varGame){  
+		let game = varGame;
+		let currentIndex = 0;
+		do predefinedLevels();
+		return this;
+	}                                         
+	
+	method void predefinedLevels(){
+		var int i, allIndex, blocks, halfAnz;
+		let levelArr = Array.new((55 + 4)); 
+		let allIndex = 0;
+		
+		let i = 0;
+		let blocks = 10;
+		let halfAnz = Math.divide(blocks, 2);
+		let levelArr[allIndex] = 10;
+		let allIndex = allIndex + 1;
+		while(i < 10){
+			let levelArr[allIndex] = Brick.new(100 + (60*Modulo.mod(i,halfAnz)), 75+((Math.divide(i,halfAnz)+1)*15), game);
+			let i = i+1;
+			let allIndex = allIndex+1;
+		}
+		
+		let i = 0;
+		let levelArr[allIndex] = 10;
+		let allIndex = allIndex + 1;
+		while(i < 10){
+			let levelArr[allIndex] = Brick.new(120 + (60*Modulo.mod(i,halfAnz)), 20+((Math.divide(i,halfAnz)+1)*(15+50)), game);
+			let i = i+1;
+			let allIndex = allIndex+1;
+		}
+		
+		let i = 0;
+		let levelArr[allIndex] = 10;
+		let allIndex = allIndex + 1;
+		while(i < 10){
+			let levelArr[allIndex] = Brick.new(140 * (Math.divide(i,halfAnz)+1), 20+(((15+10)*Modulo.mod(i,halfAnz))), game);
+			let i = i+1;
+			let allIndex = allIndex+1;
+		}
+		
+		let blocks = 25;
+		let halfAnz = Math.divide(blocks, 5);
+		let i = 0;
+		let levelArr[allIndex] = 25;
+		let allIndex = allIndex + 1;
+		while(i < 25){
+			let levelArr[allIndex] = Brick.new(10+(110 * (Math.divide(i,halfAnz))), 20+(((15+10)*Modulo.mod(i,halfAnz))), game);
+			let i = i+1;
+			let allIndex = allIndex+1;
+		}
+		
+		return;
+	}
+	
+	method Array newLevel(){  
+		var int i, blocks;
+		var Array tmpLvl;
+		var Brick tmpBlock;
+		
+		let blocks = levelArr[currentIndex];
+		let currentIndex = currentIndex + 1;
+		let tmpLvl = Array.new(blocks + 1);
+		let tmpLvl[0] = blocks;
+		let i = 1;   
+		while((i-1) < blocks){
+			let tmpBlock = levelArr[currentIndex];
+			do tmpBlock.visibility();
+			let tmpLvl[i] = tmpBlock;
+			let i = i + 1;
+			let currentIndex = currentIndex + 1;
+		}
+		return tmpLvl;
+	}
+	
+	//Gets the first level!
+	method Array firstLevel(){
+		let currentIndex = 0;
+		return newLevel();
+	}
+	
+	method void dispose(){
+		do levelArr.dispose();
+		return;
+	}
+	
+}

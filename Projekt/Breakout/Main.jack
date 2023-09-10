@@ -1,0 +1,49 @@
+class Main {
+	function void main(){
+		var int input;   
+		var boolean showText;
+		var String showedText;
+		var Game game;
+		
+		let showText = false;
+		
+		do Output.moveCursor(3, 24);
+		do Output.printString("Breakout by Anja!");
+		do Output.moveCursor(10, 8);
+		do Output.printString("Please press [1] for EASY mode or [2] for HARD mode");
+		
+		let input = Keyboard.keyPressed();
+		
+		while(input = 0){
+			do Output.moveCursor(10, 8);
+			//if(showText){
+			//	let showedText = "Please press [1] for EASY mode or [2] for HARD mode";
+			//}else{
+			//	let showedText = "Please press [1] for EASY mode or [2] for HARD mode";	
+			//}
+			
+			let showedText = "Please press [1] for EASY mode or [2] for HARD mode";
+			
+			do Output.printString(showedText);
+			do showedText.dispose();
+			let showText = ~showText;
+			
+			let input = Keyboard.keyPressed();
+		}
+		do Sys.wait(200);
+		
+		//biranje tezine
+		if(input = 49){
+		 let game = Game.new(1);
+		}
+		if(input = 50){
+		 let game = Game.new(2);
+		}
+		
+		while(~game.doExit()){
+		 do game.run();
+		}
+		
+		return;
+	}
+}
