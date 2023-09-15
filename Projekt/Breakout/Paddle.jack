@@ -69,7 +69,7 @@ class Paddle{
 					return;
 				}
 				if(ballX < (x+length)){
-					do ball.crashWithPaddle(3);
+					do ball.crashWithPaddle(2);
 					return;
 				}
 			}
