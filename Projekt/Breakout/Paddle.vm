@@ -164,7 +164,7 @@ if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
 push argument 1
-push constant 3
+push constant 2
 call Ball.crashWithPaddle 2
 pop temp 0
 push constant 0
